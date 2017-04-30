@@ -15,11 +15,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
   }
 
   $sql ="SELECT m.*,"
-  ."ua.username AS sender, "
+  ."m.id AS message_id, ua.username AS sender, "
   ."ur.username AS recipient FROM Messages m "
   ." JOIN Users ua ON m.author_id=ua.id JOIN Users ur ON ur.id = m.recipient_id WHERE m.id =". $_GET['id'];
   $result= $conn->query($sql);
   if($result==false){
+    echo $conn->error;
+  }
+  foreach ($result as $row){
+    $messageID = $row['id'];
+  }
+  $sql2="UPDATE Messages SET is_read=1 WHERE id=$messageID";
+  $result2= $conn->query($sql2);
+  if($result2==false){
     echo $conn->error;
   }
   $conn->close();
@@ -34,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>MySQL Forum - Message</title>
+    <title>MySQL Forum - Read Message</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body>
