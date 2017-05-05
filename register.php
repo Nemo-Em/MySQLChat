@@ -1,9 +1,8 @@
 <?php
 session_start();
+require_once ('src/user.php');
+require_once ('conf/config.php');
 if ($_SERVER['REQUEST_METHOD']=='POST'){
-  require_once ('src/user.php');
-  require_once ('conf/config.php');
-
   if (is_string($_POST['username']) && strlen($_POST['username'])>0 && strlen($_POST['username'])<=10){
       $username=$_POST["username"];
     }
@@ -16,6 +15,9 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
   }
   else {
     die("invalid email <a href=register.php>try again</a>");
+  }
+  if ($_POST['password'] != $_POST['passwordVerify']){
+    die("passwords don't match <a href=register.php>try again</a>");
   }
   if (is_string($_POST['password']) && strlen($_POST['password'])>=8){
     $password = $_POST['password'];
@@ -61,11 +63,13 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
             <form action="" method="POST" role="form">
                 <legend>New User</legend>
                 <b>Select Username:</b><br>
-                <input type="text" name="username"> enter username up to 10 chars<br>
+                <input type="text" name="username" placeholder="username"> enter username up to 10 chars<br>
                 <b>Email:</b><br>
-                <input type="text" name="email"> enter valid email<br>
+                <input type="text" name="email" placeholder="email"> enter valid email<br>
                 <b>Password:</b><br>
-                <input type="password" name="password"> enter password min 8 characters<br>
+                <input type="password" name="password" placeholder="password"> enter password min 8 characters<br>
+                <b>Repeat Password:</b><br>
+                <input type="password" name="passwordVerify" placeholder="password"> repeat password<br>
                 <button type="submit" class="btn btn-success">Register</button>
             </form>
             Already have an account? <a href=login.php>Login</a>
