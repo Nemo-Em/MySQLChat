@@ -78,16 +78,16 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
             <form action="" method="POST" role="form">
                 <legend>Edit User</legend>
                 <b>Change Username:</b><br>
-                <input type="text" name="username"> enter new username up to 10 chars<br>
-                <input type="password" name="passwordUsername"> enter password<br>
+                <input type="text" name="username" placeholder="username"> enter new username up to 10 chars<br>
+                <input type="password" name="passwordUsername" placeholder="password"> enter password<br>
                 <button type="submit" name= "submitUsername" class="btn btn-success">Change</button><br><hr>
                 <b>Change Email:</b><br>
-                <input type="text" name="email"> enter new valid email<br>
-                <input type="password" name="passwordEmail"> enter password<br>
+                <input type="text" name="email" placeholder="email"> enter new valid email<br>
+                <input type="password" name="passwordEmail" placeholder="password"> enter password<br>
                 <button type="submit" name="submitEmail" class="btn btn-success">Change</button><br><hr>
                 <b>Change Password:</b><br>
-                <input type="password" name="newPassword"> enter new password min 8 characters<br>
-                <input type="password" name="passwordOld"> enter old password<br>
+                <input type="password" name="newPassword" placeholder="new password"> enter new password min 8 characters<br>
+                <input type="password" name="passwordOld" placeholder="current password"> enter current password<br>
                 <button type="submit" name="submitPassword" class="btn btn-success">Change</button>
             </form>
             <br><br>

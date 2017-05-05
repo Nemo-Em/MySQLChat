@@ -47,9 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email']) && isset($_PO
             <form action="" method="POST" role="form">
                 <legend>Login</legend>
                 Email:<br>
-                <input type="text" name="email"><br>
+                <input type="text" name="email" placeholder="email"><br>
                 Password:<br>
-                <input type="password" name="password">
+                <input type="password" name="password" placeholder="password">
                 <button type="submit" class="btn btn-success">Login</button>
             </form>
             Don't have an account? <a href=register.php>Register</a>
