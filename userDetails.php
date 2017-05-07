@@ -64,10 +64,11 @@ $conn=null;
             <legend>User Details</legend>
             <?php
             foreach ($result2 as $row){
+              $userID = $row['id'];
               $username = $row['username'];
               $email = $row['email'];
             }
-            echo "<b>User:</b> $username <b>Email:</b> $email<hr>";
+            echo "<b>User account:</b> $userID <b>Name:</b> $username <b>Email:</b> $email<hr>";
             ?>
             <legend>User Posts</legend>
             <ul class='posts'>
@@ -76,7 +77,7 @@ $conn=null;
             foreach ($result as $row){
               $postID = $row['post_id'];
               $postCount++;
-              echo "<b><a href=posts.php?id=$postID>" . $row['title'] . "</a></b> posted on: " . $row['post_date'] . "<br>" . $row['count'] . " comments <br><hr>";
+              echo "<b><a href=posts.php?id=$postID&authorID=$userID&authorName=$username>" . $row['title'] . "</a></b> posted on: " . $row['post_date'] . "<br>" . $row['count'] . " comments <br><hr>";
             }
             if ($postCount==0){
               echo "this user has no posts!";
@@ -86,7 +87,7 @@ $conn=null;
             <legend>Message User</legend>
             <form action='' method='POST' role='form'>
                 Message:<br>
-                <input type='text' name='content'><br>
+                <textarea name='content'style='height:200px;width:500px;'></textarea><br>
                 <button type='submit' class='btn btn-success'>Message</button>
             </form>
             <br><br><a href=mainpage.php>Back to main page</a>

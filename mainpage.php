@@ -60,7 +60,7 @@ $allPosts = Post::loadAllPosts($conn);
                  Title:<br>
                  <input type='text' name='title'><br>
                  Content:<br>
-                 <input type='text' name='content'><br>
+                 <textarea name='content'style='height:300px;width:500px;'></textarea><br>
                  <button type='submit' class='btn btn-success'>Add Post</button><br><br>
              </form>
              <legend> All Posts</legend>
@@ -72,7 +72,7 @@ $allPosts = Post::loadAllPosts($conn);
                 $authorId=$value->getAuthorId();
                 $date=$value->getDate();
                 $author = User::loadUserByID($conn,$authorId) ->getUsername();
-                echo "<li class='posts'><a href=posts.php?id=$id>$title</a> posted by <a href=userDetails.php?id=$authorId>$author</a> on $date</li>";
+                echo "<li class='posts'><a href=posts.php?id=$id&authorID=$authorId&authorName=$author>$title</a> posted by <a href=userDetails.php?id=$authorId>$author</a> on $date</li>";
              }
              $conn->close();
              $conn = null;

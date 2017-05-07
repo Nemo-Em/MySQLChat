@@ -48,7 +48,10 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
           <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                <?php
-               echo "<h2>" . $post->getTitle() . "</h2>" . "<p>" . $post->getContent() . "</p>"
+               $author = $_GET['authorName'];
+               $authorId= $_GET['authorID'];
+               echo "<h2>" . $post->getTitle() . " by <a href=userDetails.php?id=$authorId>$author</a></h2>" . "<p>"
+               . $post->getContent() . "</p>"
                ."<legend>Comments</legend>";
                $sql2 = "SELECT *, u.id AS user_id, c.content AS comment_content FROM Posts p"
                ." JOIN Comments c ON c.post_id = p.id"
@@ -56,17 +59,21 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
                $result = $conn->query($sql2);
                $conn->close();
                $conn=null;
-
+              $commentCount=0;
                foreach($result as $row){
                  $content = $row['comment_content'];
                  $commentAuthor = $row['username'];
                  $authorId = $row['user_id'];
+                 $commentCount++;
                  echo "$content <br> posted by <a href=userDetails.php?id=$authorId>$commentAuthor</a><br><hr>";
+               }
+               if ($commentCount==0){
+                 echo "no comments yet!";
                }
                ?>
               <legend>Add New Comment</legend>
               <form action='' method='POST' role='form'>
-                  <input type='text' name='content'><br>
+                  <textarea name='content'style='height:200px;width:500px;'></textarea><br>
                   <button type='submit' class='btn btn-success'>Add Comment</button>
               </form>
               <br><br>
