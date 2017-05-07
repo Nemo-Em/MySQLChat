@@ -44,11 +44,13 @@ $conn = null;
             <h3>Inbox</h3>
             <ul class='messages'>
             <?php
+            $messageCount = 0;
             foreach ($result as $row){
               if ($row['recipient_id'] == $loggedUserID){
                 $messageID = $row['message_id'];
                 $sender = $row['sender'];
                 $senderID = $row['sender_id'];
+                $messageCount++;
                 $isRead=null;
                 if ($row['is_read'] ==null){
                   $isRead = "<b>unread</b>";
@@ -57,16 +59,21 @@ $conn = null;
                 . "...</a> from <a href=userDetails.php?id=$senderID>$sender</a> on " . $row['date'] . "</li>";
               }
             }
+            if($messageCount==0){
+              echo "inbox is empty!";
+            }
             ?>
             </ul>
             <h3>Outbox</h3>
             <ul class='messages'>
             <?php
+            $messageCount = 0;
             foreach ($result as $row){
               if ($row['author_id'] == $loggedUserID){
                 $messageID = $row['message_id'];
                 $recipient = $row['recipient'];
                 $recipientID = $row['recipient_id'];
+                $messageCount++;
                 $isRead = null;
                 if ($row['is_read'] ==null){
                   $isRead = "<b>unread</b>";
@@ -74,6 +81,9 @@ $conn = null;
                 echo "<li class='messages'>$isRead <a href=message.php?id=$messageID>" . $row['shortMessage']
                 . "...</a> to <a href=userDetails.php?id=$recipientID>$recipient</a> on " . $row['date'] . "</li>";
               }
+            }
+            if($messageCount==0){
+              echo "outbox is empty!";
             }
             ?>
             </ul>
