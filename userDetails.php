@@ -72,11 +72,15 @@ $conn=null;
             <legend>User Posts</legend>
             <ul class='posts'>
             <?php
+            $postCount=0;
             foreach ($result as $row){
               $postID = $row['post_id'];
+              $postCount++;
               echo "<b><a href=posts.php?id=$postID>" . $row['title'] . "</a></b> posted on: " . $row['post_date'] . "<br>" . $row['count'] . " comments <br><hr>";
             }
-
+            if ($postCount==0){
+              echo "this user has no posts!";
+            }
             ?>
             </ul>
             <legend>Message User</legend>
