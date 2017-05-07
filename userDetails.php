@@ -17,7 +17,7 @@ if(!isset($_GET['id']) || $_GET['id'] ==""){
 $userId=intval($_GET['id']);
 
 $sql = "select p.*, COUNT(c.id) as count, p.id as post_id, p.date as post_date, u.username as username, u.email as email FROM Posts p "
-."JOIN Comments c on c.post_id=p.id JOIN Users u on p.author_id = u.id WHERE p.author_id = $userId "
+."LEFT JOIN Comments c on c.post_id=p.id JOIN Users u on p.author_id = u.id WHERE p.author_id = $userId "
 ."GROUP BY p.id ORDER BY post_date DESC";
 $result= $conn->query($sql);
 if($result==false){
